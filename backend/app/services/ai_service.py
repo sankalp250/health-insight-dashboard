@@ -92,7 +92,7 @@ class AIService:
         """
         if not self.llm:
             return {
-                "answer": "AI features are not available. Please configure GROQ_API_KEY.",
+                "answer": "AI features are not available. Please configure GROQ_API_KEY in backend/.env file. Make sure the key is valid and has no extra spaces.",
                 "visualization": None,
                 "confidence": 0.0,
             }
