@@ -23,11 +23,15 @@ class AIService:
         self.settings = get_settings()
         self.llm = None
         if self.settings.groq_api_key:
-            self.llm = ChatGroq(
-                groq_api_key=self.settings.groq_api_key,
-                model_name="llama-3.1-70b-versatile",
-                temperature=0.7,
-            )
+            try:
+                self.llm = ChatGroq(
+                    groq_api_key=self.settings.groq_api_key.strip(),
+                    model_name="llama-3.1-70b-versatile",
+                    temperature=0.7,
+                )
+            except Exception as e:
+                print(f"Warning: Failed to initialize Groq LLM: {e}")
+                self.llm = None
 
     def _get_context_data(self, filters: dict[str, Any] | None = None) -> str:
         """Extract relevant context from the dataset for RAG."""
@@ -140,8 +144,16 @@ Please provide:
                 "confidence": 0.85,
             }
         except Exception as e:
+            error_msg = str(e)
+            # Check for API key errors
+            if "401" in error_msg or "invalid" in error_msg.lower() or "api key" in error_msg.lower():
+                return {
+                    "answer": "Invalid Groq API Key. Please check your GROQ_API_KEY in backend/.env file. Make sure:\n1. The key is correct and has no extra spaces\n2. The key is valid at https://console.groq.com/\n3. You've restarted the backend server after adding the key",
+                    "visualization": None,
+                    "confidence": 0.0,
+                }
             return {
-                "answer": f"I encountered an error processing your query: {str(e)}",
+                "answer": f"I encountered an error processing your query: {error_msg}",
                 "visualization": None,
                 "confidence": 0.0,
             }

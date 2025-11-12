@@ -12,6 +12,7 @@ import type { VaccineFilters, VaccineRecord, SummaryKPI } from './lib/api';
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [activeSection, setActiveSection] = useState('dashboard');
   const [filters, setFilters] = useState<VaccineFilters>({});
   const [vaccineData, setVaccineData] = useState<VaccineRecord[]>([]);
   const [kpis, setKpis] = useState<SummaryKPI[]>([]);
@@ -68,7 +69,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <Sidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
+      <Sidebar 
+        isOpen={sidebarOpen} 
+        onToggle={() => setSidebarOpen(!sidebarOpen)}
+        activeSection={activeSection}
+        onSectionChange={setActiveSection}
+      />
 
       <div className="md:ml-64 transition-all">
         {/* Header */}
@@ -100,30 +106,50 @@ function App() {
             </div>
           ) : (
             <>
-              {/* Filters */}
-              <FilterPanel
-                filters={filters}
-                onFiltersChange={setFilters}
-                regions={regions}
-                brands={brands}
-                years={years}
-              />
+              {/* Dashboard Section */}
+              <section id="dashboard">
+                {/* Filters */}
+                <FilterPanel
+                  filters={filters}
+                  onFiltersChange={setFilters}
+                  regions={regions}
+                  brands={brands}
+                  years={years}
+                />
 
-              {/* KPIs */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                {kpis.map((kpi) => (
-                  <KPICard key={kpi.label} kpi={kpi} />
-                ))}
-              </div>
+                {/* KPIs */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                  {kpis.map((kpi) => (
+                    <KPICard key={kpi.label} kpi={kpi} />
+                  ))}
+                </div>
+              </section>
 
-              {/* Charts */}
-              <Charts data={vaccineData} />
+              {/* Analytics Section */}
+              <section id="analytics" className="mt-8">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Analytics</h2>
+                <Charts data={vaccineData} />
+              </section>
 
-              {/* AI Features Section */}
-              <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <AIChat filters={filters} />
+              {/* Trends Section */}
+              <section id="trends" className="mt-8">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Trends & Predictions</h2>
                 <Predictions filters={filters} />
-              </div>
+              </section>
+
+              {/* Insights Section */}
+              <section id="insights" className="mt-8">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">AI Insights</h2>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <AIChat filters={filters} />
+                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Data Insights</h3>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      Use the AI Chat to ask questions about your data and get intelligent insights.
+                    </p>
+                  </div>
+                </div>
+              </section>
             </>
           )}
         </main>
