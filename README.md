@@ -2,14 +2,82 @@
 
 A comprehensive full-stack web application for analyzing global vaccine market data with AI-powered insights. Built with FastAPI, React, and Groq AI (Llama 3.1).
 
-## 🎯 Project Overview
+## 🌐 Live Application
 
-This platform combines traditional dashboard functionality with cutting-edge AI capabilities:
+**Frontend (Vercel):** [https://health-insight-dashboard.vercel.app/](https://health-insight-dashboard.vercel.app/)
 
-- **Traditional Dashboard**: Interactive filters, KPIs, and 5+ data visualizations
-- **AI Chat Interface**: Natural language queries about your data
-- **Predictive Analytics**: ML-based market forecasts with confidence intervals
-- **Smart Recommendations**: RAG-powered suggestions for data exploration
+**Backend API (Render):** [https://health-insight-dashboard.onrender.com](https://health-insight-dashboard.onrender.com)
+
+**API Documentation:** [https://health-insight-dashboard.onrender.com/docs](https://health-insight-dashboard.onrender.com/docs)
+
+**Health Check:** [https://health-insight-dashboard.onrender.com/healthz](https://health-insight-dashboard.onrender.com/healthz)
+
+---
+
+## 📋 Project Overview
+
+The **Health Insight Dashboard** is a cutting-edge vaccine market analytics platform that combines traditional business intelligence with advanced AI capabilities. This full-stack application provides comprehensive vaccine market analysis through interactive dashboards, real-time data visualization, and intelligent AI assistance for data exploration and predictive analytics.
+
+### What This Project Does
+
+This platform enables users to:
+
+- **Explore Vaccine Market Data**: Analyze global vaccine market trends across different regions, brands, and time periods
+- **Visualize Market Insights**: Interactive charts and graphs showing market size, growth rates, pricing trends, and distribution patterns
+- **Ask Questions in Natural Language**: Use AI-powered chat interface to query data using plain English
+- **Predict Future Trends**: Get AI-generated market forecasts with confidence intervals for strategic planning
+- **Receive Smart Recommendations**: Context-aware suggestions for data exploration based on current filters
+
+### Key Capabilities
+
+**Data Exploration & Analysis:**
+- Interactive filtering across multiple dimensions (region, brand, year)
+- Real-time calculation of key performance indicators (KPIs)
+- Multi-dimensional data visualization with various chart types
+- Responsive design optimized for desktop and mobile devices
+
+**AI-Powered Intelligence:**
+- Natural language query interface for conversational data exploration
+- Predictive analytics using machine learning algorithms
+- Context-aware recommendations for data discovery
+- Intelligent insights generation using Large Language Models (LLMs)
+
+**Technical Excellence:**
+- Modern full-stack architecture with separation of concerns
+- RESTful API design with comprehensive documentation
+- Containerized deployment with Docker support
+- Cloud-native deployment on Render and Vercel
+
+## 🎯 Features
+
+### Traditional Dashboard
+- **Interactive Filters**: Filter data by region, brand, and year with real-time updates
+- **Key Performance Indicators (KPIs)**: Real-time metrics including:
+  - Compound Annual Growth Rate (CAGR)
+  - Total Market Size (USD)
+  - Average Price per Dose
+  - Total Doses Sold
+- **Data Visualization**: Multiple chart types powered by Recharts:
+  - Bar charts for comparative analysis
+  - Line charts for trend visualization
+  - Pie charts for distribution analysis
+- **Responsive Design**: Modern UI with dark mode support and mobile optimization
+
+### AI-Powered Features
+- **Natural Language Queries**: Chat with your data using plain English
+  - Ask questions like "What are the top brands in Asia?"
+  - Get intelligent answers with suggested visualizations
+  - Context-aware responses based on current filters
+- **Market Predictions**: AI-generated forecasts based on historical trends
+  - Linear extrapolation for market size predictions
+  - Confidence intervals for forecast reliability
+  - Multi-year ahead projections (1-5 years)
+- **Smart Recommendations**: Context-aware suggestions for data exploration
+  - RAG-powered recommendations
+  - Actionable insights based on current data view
+- **RAG (Retrieval-Augmented Generation)**: Intelligent data context retrieval
+  - Automatic context extraction from filtered data
+  - Enhanced LLM responses with relevant data context
 
 ## 🏗️ Architecture
 
