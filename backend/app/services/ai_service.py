@@ -228,28 +228,30 @@ Please provide:
 
                 # Simple linear extrapolation
                 if len(yearly_data) >= 2:
-                    market_trend = (
-                        yearly_data["market_size_usd"].iloc[-1]
-                        - yearly_data["market_size_usd"].iloc[-2]
-                    ) / (yearly_data["year"].iloc[-1] - yearly_data["year"].iloc[-2])
-                    predicted_market = (
+                    market_trend = float(
+                        (yearly_data["market_size_usd"].iloc[-1]
+                        - yearly_data["market_size_usd"].iloc[-2])
+                        / (int(yearly_data["year"].iloc[-1]) - int(yearly_data["year"].iloc[-2]))
+                    )
+                    predicted_market = float(
                         yearly_data["market_size_usd"].iloc[-1]
                         + market_trend * i
                     )
 
-                    price_trend = (
-                        yearly_data["avg_price_usd"].iloc[-1]
-                        - yearly_data["avg_price_usd"].iloc[-2]
-                    ) / (yearly_data["year"].iloc[-1] - yearly_data["year"].iloc[-2])
-                    predicted_price = (
+                    price_trend = float(
+                        (yearly_data["avg_price_usd"].iloc[-1]
+                        - yearly_data["avg_price_usd"].iloc[-2])
+                        / (int(yearly_data["year"].iloc[-1]) - int(yearly_data["year"].iloc[-2]))
+                    )
+                    predicted_price = float(
                         yearly_data["avg_price_usd"].iloc[-1] + price_trend * i
                     )
 
-                    avg_growth = yearly_data["growth_rate_percent"].mean()
+                    avg_growth = float(yearly_data["growth_rate_percent"].mean())
                 else:
-                    predicted_market = yearly_data["market_size_usd"].iloc[-1]
-                    predicted_price = yearly_data["avg_price_usd"].iloc[-1]
-                    avg_growth = 0
+                    predicted_market = float(yearly_data["market_size_usd"].iloc[-1])
+                    predicted_price = float(yearly_data["avg_price_usd"].iloc[-1])
+                    avg_growth = 0.0
 
                 predictions.append(
                     {
