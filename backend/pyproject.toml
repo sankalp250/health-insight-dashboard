@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "health-insight-backend"
+description = "FastAPI backend for the Health Insight Dashboard."
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "pandas>=2.2.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.2.0",
+    "python-multipart>=0.0.9"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "httpx>=0.26.0",
+    "ruff>=0.6.0",
+    "black>=24.3.0"
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+select = ["E", "F", "I", "UP", "B", "C4"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+pythonpath = [
+    "app"
+]
+

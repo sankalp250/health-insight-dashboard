@@ -1,0 +1,289 @@
+region,brand,year,market_size_usd,avg_price_usd,doses_sold_million,growth_rate_percent,insight
+Asia,Pfizer,2018,55139553.16,38.53,12.01,2.52,Market stabilization observed
+Asia,Pfizer,2019,34770254.72,42.92,1.31,5.42,Steady growth due to demand rise
+Asia,Pfizer,2020,99383127.38,28.1,18.45,4.96,Steady growth due to demand rise
+Asia,Pfizer,2021,42078096.7,26.13,3.61,4.76,Steady growth due to demand rise
+Asia,Pfizer,2022,28524897.34,40.33,4.27,6.79,High competition affects pricing
+Asia,Pfizer,2023,96669205.67,39.01,3.58,9.77,Market stabilization observed
+Asia,Pfizer,2024,53367232.45,40.91,7.67,9.43,Government-backed vaccination push
+Asia,Pfizer,2025,58781047.06,36.47,15.59,8.29,Steady growth due to demand rise
+Asia,Moderna,2018,80594913.2,36.91,14.96,1.13,Government-backed vaccination push
+Asia,Moderna,2019,41336460.11,44.56,3.45,7.09,Steady growth due to demand rise
+Asia,Moderna,2020,53971578.51,17.7,6.3,4.12,Steady growth due to demand rise
+Asia,Moderna,2021,27312160.15,38.87,18.48,6.88,Price adjustment impacts sales
+Asia,Moderna,2022,31020180.37,13.42,7.98,9.04,Price adjustment impacts sales
+Asia,Moderna,2023,53086597.58,14.73,12.4,7.5,New vaccine variant launch
+Asia,Moderna,2024,97062460.21,35.18,17.01,3.49,Steady growth due to demand rise
+Asia,Moderna,2025,42916036.08,42.55,18.6,7.04,Price adjustment impacts sales
+Asia,AstraZeneca,2018,28433445.89,49.57,18.84,8.78,Market stabilization observed
+Asia,AstraZeneca,2019,26161117.3,21.49,18.0,5.06,Steady growth due to demand rise
+Asia,AstraZeneca,2020,55932297.43,24.43,18.06,5.8,Market stabilization observed
+Asia,AstraZeneca,2021,25684837.24,31.98,11.96,6.84,Government-backed vaccination push
+Asia,AstraZeneca,2022,23892493.39,15.83,11.03,5.95,Market stabilization observed
+Asia,AstraZeneca,2023,13090809.53,21.59,17.15,8.29,Government-backed vaccination push
+Asia,AstraZeneca,2024,56126988.31,21.18,2.38,1.43,Steady growth due to demand rise
+Asia,AstraZeneca,2025,30230910.63,21.06,8.43,9.97,Steady growth due to demand rise
+Asia,Bharat Biotech,2018,62173605.23,15.4,5.02,5.82,New vaccine variant launch
+Asia,Bharat Biotech,2019,37529453.28,41.92,10.05,1.83,High competition affects pricing
+Asia,Bharat Biotech,2020,81090310.89,31.09,3.8,5.83,Government-backed vaccination push
+Asia,Bharat Biotech,2021,73274639.02,25.43,5.42,5.08,Price adjustment impacts sales
+Asia,Bharat Biotech,2022,27760466.87,19.05,6.2,3.0,Government-backed vaccination push
+Asia,Bharat Biotech,2023,22694946.77,13.81,19.53,9.22,Market stabilization observed
+Asia,Bharat Biotech,2024,43685065.53,16.51,6.8,7.85,High competition affects pricing
+Asia,Bharat Biotech,2025,27339273.92,24.67,4.26,7.76,Steady growth due to demand rise
+Asia,Sinovac,2018,21209906.55,22.25,16.96,6.05,Government-backed vaccination push
+Asia,Sinovac,2019,77998833.42,24.53,19.59,2.82,High competition affects pricing
+Asia,Sinovac,2020,39360155.09,48.77,17.89,2.08,High competition affects pricing
+Asia,Sinovac,2021,42516524.94,41.4,13.73,7.62,Government-backed vaccination push
+Asia,Sinovac,2022,74773905.12,23.07,7.83,1.38,Market stabilization observed
+Asia,Sinovac,2023,77469776.63,41.63,7.79,7.21,Government-backed vaccination push
+Asia,Sinovac,2024,14934388.88,46.7,18.09,5.68,Market stabilization observed
+Asia,Sinovac,2025,21184054.68,35.42,10.03,7.02,Market stabilization observed
+Asia,Johnson & Johnson,2018,94922435.18,19.56,9.23,9.91,New vaccine variant launch
+Asia,Johnson & Johnson,2019,56788160.58,47.37,17.3,9.1,High competition affects pricing
+Asia,Johnson & Johnson,2020,67538576.39,37.19,5.15,3.76,Market stabilization observed
+Asia,Johnson & Johnson,2021,85376576.77,16.31,18.26,9.64,Market stabilization observed
+Asia,Johnson & Johnson,2022,56704484.62,12.03,18.77,3.18,Government-backed vaccination push
+Asia,Johnson & Johnson,2023,65392524.9,16.21,14.26,8.89,Market stabilization observed
+Asia,Johnson & Johnson,2024,90559447.85,32.91,4.64,1.06,New vaccine variant launch
+Asia,Johnson & Johnson,2025,20478724.19,26.4,7.01,1.72,Steady growth due to demand rise
+Europe,Pfizer,2018,98996044.79,23.54,15.44,7.75,High competition affects pricing
+Europe,Pfizer,2019,52249464.55,13.57,14.9,9.53,New vaccine variant launch
+Europe,Pfizer,2020,24567210.3,35.29,16.44,4.96,Market stabilization observed
+Europe,Pfizer,2021,66266772.96,29.82,16.75,4.37,Steady growth due to demand rise
+Europe,Pfizer,2022,68252556.07,17.79,18.53,5.55,Market stabilization observed
+Europe,Pfizer,2023,57182444.88,36.43,10.55,5.64,Market stabilization observed
+Europe,Pfizer,2024,93124639.25,49.56,6.24,9.79,New vaccine variant launch
+Europe,Pfizer,2025,17924304.46,30.11,10.51,9.17,Price adjustment impacts sales
+Europe,Moderna,2018,62800855.19,45.71,2.73,3.61,Government-backed vaccination push
+Europe,Moderna,2019,22762331.6,10.12,12.59,8.2,New vaccine variant launch
+Europe,Moderna,2020,76171624.36,39.46,9.7,2.01,Price adjustment impacts sales
+Europe,Moderna,2021,68173376.69,37.84,17.79,3.91,Market stabilization observed
+Europe,Moderna,2022,24112283.54,18.86,14.74,6.3,High competition affects pricing
+Europe,Moderna,2023,59446958.66,17.9,16.46,2.19,High competition affects pricing
+Europe,Moderna,2024,87530628.75,14.4,12.4,2.59,Price adjustment impacts sales
+Europe,Moderna,2025,96631730.28,18.92,5.26,8.43,New vaccine variant launch
+Europe,AstraZeneca,2018,66547652.62,40.67,1.6,7.18,Market stabilization observed
+Europe,AstraZeneca,2019,49786184.67,23.62,16.62,3.57,High competition affects pricing
+Europe,AstraZeneca,2020,17034353.77,30.42,17.26,6.18,High competition affects pricing
+Europe,AstraZeneca,2021,39728167.66,32.75,16.07,8.62,Market stabilization observed
+Europe,AstraZeneca,2022,72277118.87,37.93,10.81,5.38,Market stabilization observed
+Europe,AstraZeneca,2023,71917579.9,28.63,14.98,7.62,Market stabilization observed
+Europe,AstraZeneca,2024,44336760.99,18.94,7.71,7.75,New vaccine variant launch
+Europe,AstraZeneca,2025,39217609.94,21.66,6.21,1.35,Government-backed vaccination push
+Europe,Bharat Biotech,2018,38158942.83,17.34,5.75,4.66,Market stabilization observed
+Europe,Bharat Biotech,2019,26398638.54,31.88,3.96,4.45,New vaccine variant launch
+Europe,Bharat Biotech,2020,83765433.73,25.88,16.1,4.43,Steady growth due to demand rise
+Europe,Bharat Biotech,2021,68511951.23,26.46,18.91,4.5,Government-backed vaccination push
+Europe,Bharat Biotech,2022,48235913.44,40.82,7.1,5.98,Steady growth due to demand rise
+Europe,Bharat Biotech,2023,61699229.19,33.58,17.44,3.6,Steady growth due to demand rise
+Europe,Bharat Biotech,2024,25704015.49,41.01,10.89,9.1,Government-backed vaccination push
+Europe,Bharat Biotech,2025,34293726.95,37.72,5.92,9.83,High competition affects pricing
+Europe,Sinovac,2018,92650545.75,29.05,3.54,6.63,New vaccine variant launch
+Europe,Sinovac,2019,65636349.07,10.54,8.74,8.86,Steady growth due to demand rise
+Europe,Sinovac,2020,71942512.9,41.28,1.6,3.13,Market stabilization observed
+Europe,Sinovac,2021,81704146.62,22.1,13.47,1.11,Steady growth due to demand rise
+Europe,Sinovac,2022,97594693.16,43.62,15.25,2.83,Market stabilization observed
+Europe,Sinovac,2023,49700517.52,32.7,10.02,9.86,Government-backed vaccination push
+Europe,Sinovac,2024,50320871.52,13.7,4.07,6.59,Government-backed vaccination push
+Europe,Sinovac,2025,18601769.58,10.45,12.66,7.6,New vaccine variant launch
+Europe,Johnson & Johnson,2018,33516737.15,46.82,9.52,9.78,Price adjustment impacts sales
+Europe,Johnson & Johnson,2019,96120511.34,17.78,1.59,5.2,Price adjustment impacts sales
+Europe,Johnson & Johnson,2020,64565042.72,36.78,16.5,7.39,Market stabilization observed
+Europe,Johnson & Johnson,2021,39211023.42,47.04,19.74,7.64,Market stabilization observed
+Europe,Johnson & Johnson,2022,58334585.71,46.97,13.84,2.12,Government-backed vaccination push
+Europe,Johnson & Johnson,2023,30212004.82,11.31,8.44,1.58,Steady growth due to demand rise
+Europe,Johnson & Johnson,2024,12841072.54,28.82,3.82,5.41,Government-backed vaccination push
+Europe,Johnson & Johnson,2025,94532197.59,37.86,19.69,9.0,Market stabilization observed
+North America,Pfizer,2018,29969377.54,30.64,4.35,3.75,High competition affects pricing
+North America,Pfizer,2019,54371789.86,21.8,10.08,2.9,High competition affects pricing
+North America,Pfizer,2020,96335743.03,36.02,18.86,8.53,Market stabilization observed
+North America,Pfizer,2021,83182131.05,31.15,9.04,4.23,Market stabilization observed
+North America,Pfizer,2022,47550693.99,23.62,8.76,6.43,High competition affects pricing
+North America,Pfizer,2023,86367434.65,38.92,11.51,3.84,Government-backed vaccination push
+North America,Pfizer,2024,90078527.09,26.14,14.89,5.35,Price adjustment impacts sales
+North America,Pfizer,2025,41157124.34,32.79,11.85,5.26,Steady growth due to demand rise
+North America,Moderna,2018,58169637.46,27.53,10.89,6.36,Government-backed vaccination push
+North America,Moderna,2019,54696633.6,29.18,10.23,6.18,High competition affects pricing
+North America,Moderna,2020,61510199.8,46.61,12.1,9.83,Steady growth due to demand rise
+North America,Moderna,2021,98922680.58,38.41,12.36,6.04,Market stabilization observed
+North America,Moderna,2022,15615350.89,25.27,15.84,2.54,Steady growth due to demand rise
+North America,Moderna,2023,35018916.22,19.81,5.78,5.72,New vaccine variant launch
+North America,Moderna,2024,87401237.12,17.15,10.14,8.32,Price adjustment impacts sales
+North America,Moderna,2025,66370613.09,47.73,4.18,6.23,Price adjustment impacts sales
+North America,AstraZeneca,2018,76570321.28,12.95,3.43,7.19,Market stabilization observed
+North America,AstraZeneca,2019,54387598.07,31.32,9.68,3.92,Market stabilization observed
+North America,AstraZeneca,2020,49002525.51,22.91,6.9,2.38,High competition affects pricing
+North America,AstraZeneca,2021,66856641.09,44.16,14.6,8.07,New vaccine variant launch
+North America,AstraZeneca,2022,32233710.2,11.09,5.59,1.78,Steady growth due to demand rise
+North America,AstraZeneca,2023,54254665.83,46.69,1.58,4.81,Market stabilization observed
+North America,AstraZeneca,2024,21545900.52,31.57,7.97,8.55,Price adjustment impacts sales
+North America,AstraZeneca,2025,79797085.51,20.83,1.98,3.14,High competition affects pricing
+North America,Bharat Biotech,2018,62317338.2,31.93,6.16,1.21,Steady growth due to demand rise
+North America,Bharat Biotech,2019,82343197.92,23.84,4.29,3.3,Price adjustment impacts sales
+North America,Bharat Biotech,2020,39817954.34,11.8,8.73,8.5,High competition affects pricing
+North America,Bharat Biotech,2021,27142865.39,48.83,6.02,8.22,Government-backed vaccination push
+North America,Bharat Biotech,2022,27515797.34,21.64,14.74,5.29,Government-backed vaccination push
+North America,Bharat Biotech,2023,52037633.45,30.16,13.73,7.92,High competition affects pricing
+North America,Bharat Biotech,2024,91425824.61,35.42,1.63,1.71,High competition affects pricing
+North America,Bharat Biotech,2025,87624364.75,48.41,14.3,8.72,New vaccine variant launch
+North America,Sinovac,2018,73991630.27,42.17,16.37,5.29,Market stabilization observed
+North America,Sinovac,2019,58778157.96,26.97,16.28,9.94,Price adjustment impacts sales
+North America,Sinovac,2020,41117702.56,45.69,8.51,1.7,High competition affects pricing
+North America,Sinovac,2021,87597653.84,21.53,3.39,6.08,High competition affects pricing
+North America,Sinovac,2022,27455806.47,15.38,16.19,9.39,High competition affects pricing
+North America,Sinovac,2023,52407362.44,41.74,15.93,3.87,Market stabilization observed
+North America,Sinovac,2024,86252403.35,16.26,9.83,4.42,Government-backed vaccination push
+North America,Sinovac,2025,49497389.71,22.05,9.6,8.64,High competition affects pricing
+North America,Johnson & Johnson,2018,19954203.76,27.96,2.9,3.07,Government-backed vaccination push
+North America,Johnson & Johnson,2019,32152098.54,29.27,19.91,2.26,Government-backed vaccination push
+North America,Johnson & Johnson,2020,74836515.09,15.06,2.98,4.35,Government-backed vaccination push
+North America,Johnson & Johnson,2021,57945081.62,14.2,18.38,5.46,High competition affects pricing
+North America,Johnson & Johnson,2022,70560598.14,26.53,8.16,5.25,Market stabilization observed
+North America,Johnson & Johnson,2023,13408697.46,34.06,17.49,1.19,High competition affects pricing
+North America,Johnson & Johnson,2024,43687019.21,17.74,7.64,4.11,Price adjustment impacts sales
+North America,Johnson & Johnson,2025,34448080.69,40.63,4.63,7.03,Government-backed vaccination push
+South America,Pfizer,2018,97888354.71,16.6,18.35,8.22,Price adjustment impacts sales
+South America,Pfizer,2019,25895119.62,25.92,10.6,3.97,Price adjustment impacts sales
+South America,Pfizer,2020,14656464.54,29.13,8.3,4.73,Government-backed vaccination push
+South America,Pfizer,2021,48116352.68,31.03,8.74,5.92,High competition affects pricing
+South America,Pfizer,2022,95836653.1,46.83,5.98,7.77,New vaccine variant launch
+South America,Pfizer,2023,87356315.74,46.84,5.53,2.84,Steady growth due to demand rise
+South America,Pfizer,2024,38255370.1,49.16,13.21,1.9,Government-backed vaccination push
+South America,Pfizer,2025,82355674.52,45.71,11.03,9.05,New vaccine variant launch
+South America,Moderna,2018,74941588.31,34.15,1.73,1.84,High competition affects pricing
+South America,Moderna,2019,79611640.39,13.17,4.05,3.8,Government-backed vaccination push
+South America,Moderna,2020,46776220.64,37.12,16.85,2.26,Price adjustment impacts sales
+South America,Moderna,2021,15544776.75,13.69,6.89,1.97,High competition affects pricing
+South America,Moderna,2022,18540326.29,37.5,14.68,4.1,New vaccine variant launch
+South America,Moderna,2023,91180070.93,23.64,16.42,9.36,High competition affects pricing
+South America,Moderna,2024,77117868.48,25.26,8.49,7.72,High competition affects pricing
+South America,Moderna,2025,19696710.31,35.71,16.06,1.02,Government-backed vaccination push
+South America,AstraZeneca,2018,96265671.74,11.19,1.88,3.36,High competition affects pricing
+South America,AstraZeneca,2019,57751467.2,38.25,19.42,2.41,Price adjustment impacts sales
+South America,AstraZeneca,2020,20176188.83,42.88,2.37,4.12,Steady growth due to demand rise
+South America,AstraZeneca,2021,34906097.7,35.31,10.2,9.31,Steady growth due to demand rise
+South America,AstraZeneca,2022,78744569.56,42.45,19.23,3.98,Government-backed vaccination push
+South America,AstraZeneca,2023,66400445.38,18.56,18.75,3.43,Government-backed vaccination push
+South America,AstraZeneca,2024,17537266.35,49.68,17.18,3.48,Government-backed vaccination push
+South America,AstraZeneca,2025,16868885.47,36.37,15.5,1.32,Steady growth due to demand rise
+South America,Bharat Biotech,2018,25945370.75,17.93,11.21,4.7,Price adjustment impacts sales
+South America,Bharat Biotech,2019,95236945.12,31.64,7.05,9.65,New vaccine variant launch
+South America,Bharat Biotech,2020,23035108.63,37.51,11.32,6.09,New vaccine variant launch
+South America,Bharat Biotech,2021,38519231.72,36.01,17.83,2.0,Price adjustment impacts sales
+South America,Bharat Biotech,2022,99389622.72,22.9,6.22,1.6,New vaccine variant launch
+South America,Bharat Biotech,2023,16229837.19,28.0,4.73,5.58,Government-backed vaccination push
+South America,Bharat Biotech,2024,98065315.75,42.45,11.96,9.23,New vaccine variant launch
+South America,Bharat Biotech,2025,12156786.59,14.87,15.58,5.05,Government-backed vaccination push
+South America,Sinovac,2018,51082174.35,34.8,5.12,7.26,New vaccine variant launch
+South America,Sinovac,2019,55697761.59,48.88,15.17,6.96,New vaccine variant launch
+South America,Sinovac,2020,95838164.82,36.39,14.52,5.76,High competition affects pricing
+South America,Sinovac,2021,14223889.89,14.94,2.16,4.25,Government-backed vaccination push
+South America,Sinovac,2022,78020071.47,21.82,1.52,4.17,Steady growth due to demand rise
+South America,Sinovac,2023,88590573.41,11.23,13.27,7.06,Market stabilization observed
+South America,Sinovac,2024,21366039.15,44.52,10.29,9.79,High competition affects pricing
+South America,Sinovac,2025,62567581.0,33.59,1.54,6.49,Market stabilization observed
+South America,Johnson & Johnson,2018,56603093.02,34.43,8.63,3.68,New vaccine variant launch
+South America,Johnson & Johnson,2019,49710141.42,19.86,9.08,1.78,Price adjustment impacts sales
+South America,Johnson & Johnson,2020,44718359.45,21.58,8.2,5.48,High competition affects pricing
+South America,Johnson & Johnson,2021,85965292.19,16.99,14.75,2.27,Market stabilization observed
+South America,Johnson & Johnson,2022,49783253.79,17.51,14.26,7.19,Market stabilization observed
+South America,Johnson & Johnson,2023,37795936.67,10.55,16.68,5.58,Government-backed vaccination push
+South America,Johnson & Johnson,2024,21529645.46,39.07,8.77,9.39,High competition affects pricing
+South America,Johnson & Johnson,2025,25354688.32,24.1,16.16,1.46,Steady growth due to demand rise
+Africa,Pfizer,2018,53170975.88,36.24,6.33,8.1,High competition affects pricing
+Africa,Pfizer,2019,50737826.7,25.61,1.96,9.04,New vaccine variant launch
+Africa,Pfizer,2020,17645122.18,10.63,8.86,6.04,Price adjustment impacts sales
+Africa,Pfizer,2021,98755136.08,10.63,9.11,9.95,High competition affects pricing
+Africa,Pfizer,2022,18246292.21,10.62,16.4,5.48,New vaccine variant launch
+Africa,Pfizer,2023,78519063.49,15.53,7.4,2.81,New vaccine variant launch
+Africa,Pfizer,2024,84945807.48,44.1,6.26,9.47,Government-backed vaccination push
+Africa,Pfizer,2025,54991143.32,38.24,13.36,8.6,Steady growth due to demand rise
+Africa,Moderna,2018,53838570.02,14.29,1.67,7.88,Market stabilization observed
+Africa,Moderna,2019,23328852.87,13.6,10.95,8.18,High competition affects pricing
+Africa,Moderna,2020,78428893.85,24.33,13.84,4.97,Steady growth due to demand rise
+Africa,Moderna,2021,31788251.8,14.11,16.88,4.58,Price adjustment impacts sales
+Africa,Moderna,2022,69092939.33,24.35,15.58,6.74,Market stabilization observed
+Africa,Moderna,2023,38338553.72,49.53,17.29,1.22,Market stabilization observed
+Africa,Moderna,2024,66884088.7,41.48,14.19,5.11,Steady growth due to demand rise
+Africa,Moderna,2025,62543358.8,27.11,13.99,5.4,High competition affects pricing
+Africa,AstraZeneca,2018,16098612.95,28.53,9.16,9.34,New vaccine variant launch
+Africa,AstraZeneca,2019,87272734.63,39.63,7.04,4.33,Steady growth due to demand rise
+Africa,AstraZeneca,2020,95256790.79,14.87,8.48,9.93,Market stabilization observed
+Africa,AstraZeneca,2021,42506139.1,13.26,19.57,7.66,Government-backed vaccination push
+Africa,AstraZeneca,2022,87000971.22,29.36,16.23,6.45,Steady growth due to demand rise
+Africa,AstraZeneca,2023,16887894.13,31.99,7.12,8.84,Steady growth due to demand rise
+Africa,AstraZeneca,2024,19816211.44,24.33,3.65,9.91,Government-backed vaccination push
+Africa,AstraZeneca,2025,82012332.52,19.25,8.32,5.12,New vaccine variant launch
+Africa,Bharat Biotech,2018,21186827.68,46.32,5.38,8.47,High competition affects pricing
+Africa,Bharat Biotech,2019,58686256.48,11.79,9.94,5.41,New vaccine variant launch
+Africa,Bharat Biotech,2020,92727263.37,25.32,2.68,7.89,Government-backed vaccination push
+Africa,Bharat Biotech,2021,21817019.76,28.52,12.76,1.81,Government-backed vaccination push
+Africa,Bharat Biotech,2022,75782364.89,44.2,17.04,3.24,High competition affects pricing
+Africa,Bharat Biotech,2023,28189372.89,15.22,17.49,8.52,Government-backed vaccination push
+Africa,Bharat Biotech,2024,19630647.81,20.65,12.64,1.31,Government-backed vaccination push
+Africa,Bharat Biotech,2025,21875321.21,25.44,18.72,3.2,Price adjustment impacts sales
+Africa,Sinovac,2018,79176313.24,20.79,16.26,6.15,New vaccine variant launch
+Africa,Sinovac,2019,80076700.35,23.93,8.87,6.75,New vaccine variant launch
+Africa,Sinovac,2020,34324261.36,30.84,8.57,9.83,Price adjustment impacts sales
+Africa,Sinovac,2021,83688811.33,16.57,9.23,9.38,Market stabilization observed
+Africa,Sinovac,2022,99979315.07,43.19,3.57,9.69,Steady growth due to demand rise
+Africa,Sinovac,2023,81632490.25,10.53,18.59,8.89,New vaccine variant launch
+Africa,Sinovac,2024,52828305.44,17.44,2.34,2.46,Market stabilization observed
+Africa,Sinovac,2025,55237818.11,42.24,16.77,3.5,High competition affects pricing
+Africa,Johnson & Johnson,2018,42524115.0,42.51,10.85,6.79,Price adjustment impacts sales
+Africa,Johnson & Johnson,2019,91080215.31,36.13,16.33,5.59,New vaccine variant launch
+Africa,Johnson & Johnson,2020,38781754.44,44.77,13.89,3.46,Government-backed vaccination push
+Africa,Johnson & Johnson,2021,57280759.05,26.91,18.49,1.12,Government-backed vaccination push
+Africa,Johnson & Johnson,2022,38346826.92,27.68,3.8,1.68,New vaccine variant launch
+Africa,Johnson & Johnson,2023,86218517.08,35.27,2.23,5.19,Price adjustment impacts sales
+Africa,Johnson & Johnson,2024,88257258.99,28.02,17.11,4.84,Market stabilization observed
+Africa,Johnson & Johnson,2025,13240539.94,13.89,9.06,3.62,High competition affects pricing
+Oceania,Pfizer,2018,13171086.76,42.15,18.26,3.81,High competition affects pricing
+Oceania,Pfizer,2019,43445023.97,29.79,1.6,4.79,Price adjustment impacts sales
+Oceania,Pfizer,2020,43508786.14,39.73,5.5,9.69,Government-backed vaccination push
+Oceania,Pfizer,2021,79132885.45,11.43,1.93,4.05,Market stabilization observed
+Oceania,Pfizer,2022,83493521.92,25.68,19.74,2.8,Government-backed vaccination push
+Oceania,Pfizer,2023,16986128.57,11.19,15.92,2.0,Market stabilization observed
+Oceania,Pfizer,2024,19771106.91,31.06,7.48,4.75,Price adjustment impacts sales
+Oceania,Pfizer,2025,31885573.4,30.92,15.91,4.4,Steady growth due to demand rise
+Oceania,Moderna,2018,54560630.13,19.13,6.69,1.22,High competition affects pricing
+Oceania,Moderna,2019,96323024.94,39.79,3.11,5.69,High competition affects pricing
+Oceania,Moderna,2020,52614120.15,28.27,10.96,7.97,Government-backed vaccination push
+Oceania,Moderna,2021,76773281.91,38.73,1.33,4.19,High competition affects pricing
+Oceania,Moderna,2022,92230605.12,28.52,11.76,6.41,New vaccine variant launch
+Oceania,Moderna,2023,95314442.73,45.39,1.19,9.26,Government-backed vaccination push
+Oceania,Moderna,2024,83877538.94,12.59,5.5,6.4,Steady growth due to demand rise
+Oceania,Moderna,2025,77772849.62,10.55,10.47,9.58,High competition affects pricing
+Oceania,AstraZeneca,2018,52353231.23,48.2,1.17,9.25,Steady growth due to demand rise
+Oceania,AstraZeneca,2019,28248370.62,14.84,10.79,9.92,Price adjustment impacts sales
+Oceania,AstraZeneca,2020,56105240.01,27.85,15.99,5.89,Price adjustment impacts sales
+Oceania,AstraZeneca,2021,97524761.33,37.02,19.32,1.13,Government-backed vaccination push
+Oceania,AstraZeneca,2022,96666026.48,35.85,16.92,4.48,Steady growth due to demand rise
+Oceania,AstraZeneca,2023,86792716.29,31.45,2.83,9.46,Price adjustment impacts sales
+Oceania,AstraZeneca,2024,77030697.2,40.27,19.29,7.08,Price adjustment impacts sales
+Oceania,AstraZeneca,2025,94598581.12,17.17,6.09,8.39,New vaccine variant launch
+Oceania,Bharat Biotech,2018,35563423.6,25.07,8.16,3.01,High competition affects pricing
+Oceania,Bharat Biotech,2019,66326832.22,42.78,15.28,5.02,High competition affects pricing
+Oceania,Bharat Biotech,2020,70969991.57,14.54,2.34,5.67,Steady growth due to demand rise
+Oceania,Bharat Biotech,2021,71653914.01,47.84,2.14,3.15,Steady growth due to demand rise
+Oceania,Bharat Biotech,2022,94621557.39,38.45,15.61,1.5,Steady growth due to demand rise
+Oceania,Bharat Biotech,2023,69223679.59,41.93,6.17,1.91,High competition affects pricing
+Oceania,Bharat Biotech,2024,92180167.73,10.55,13.35,4.99,Price adjustment impacts sales
+Oceania,Bharat Biotech,2025,37357821.43,17.49,7.2,1.86,Price adjustment impacts sales
+Oceania,Sinovac,2018,77875670.25,18.72,6.14,1.91,High competition affects pricing
+Oceania,Sinovac,2019,32995188.49,27.21,6.99,1.61,Market stabilization observed
+Oceania,Sinovac,2020,43835090.12,22.32,13.34,6.85,Government-backed vaccination push
+Oceania,Sinovac,2021,76463791.38,34.05,7.99,4.92,Steady growth due to demand rise
+Oceania,Sinovac,2022,48472775.36,24.93,4.24,1.16,Steady growth due to demand rise
+Oceania,Sinovac,2023,85013896.52,30.15,5.11,4.18,Government-backed vaccination push
+Oceania,Sinovac,2024,39584130.52,23.29,10.29,6.96,Market stabilization observed
+Oceania,Sinovac,2025,67751907.11,43.07,4.26,4.29,Market stabilization observed
+Oceania,Johnson & Johnson,2018,88107627.76,15.93,12.62,4.04,Market stabilization observed
+Oceania,Johnson & Johnson,2019,71782293.24,13.54,12.6,8.64,New vaccine variant launch
+Oceania,Johnson & Johnson,2020,91121718.13,19.29,16.3,2.25,Steady growth due to demand rise
+Oceania,Johnson & Johnson,2021,54741070.28,26.08,7.05,4.83,High competition affects pricing
+Oceania,Johnson & Johnson,2022,18715047.87,43.96,6.79,1.81,High competition affects pricing
+Oceania,Johnson & Johnson,2023,37114562.74,45.79,14.69,9.35,Price adjustment impacts sales
+Oceania,Johnson & Johnson,2024,89866711.6,13.87,18.74,6.63,New vaccine variant launch
+Oceania,Johnson & Johnson,2025,54417717.14,26.36,11.26,2.92,Government-backed vaccination push
