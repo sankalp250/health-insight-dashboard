@@ -260,7 +260,7 @@ Please provide:
             )
 
         # Get AI insight on predictions
-        ai_insight = ""
+        ai_insight = None
         if self.llm:
             try:
                 context = self._get_context_data(filters)
@@ -270,11 +270,13 @@ Please provide:
 And these predictions for {years_ahead} years ahead:
 {json.dumps(predictions, indent=2)}
 
-Provide a brief (2-3 sentence) insight about the predicted market trends."""
+Provide a brief (2-3 sentence) insight about the predicted market trends. Be specific and mention key numbers."""
                 response = await self.llm.ainvoke([HumanMessage(content=prompt)])
                 ai_insight = response.content
-            except Exception:
-                ai_insight = "AI analysis unavailable."
+            except Exception as e:
+                # Don't fail if AI insight fails, just skip it
+                print(f"Warning: Failed to get AI insight: {e}")
+                ai_insight = None
 
         return {
             "predictions": predictions,
