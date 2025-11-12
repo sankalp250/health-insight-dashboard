@@ -140,15 +140,7 @@ function App() {
               {/* Insights Section */}
               <section id="insights" className="mt-8">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">AI Insights</h2>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <AIChat filters={filters} />
-                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Data Insights</h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      Use the AI Chat to ask questions about your data and get intelligent insights.
-                    </p>
-                  </div>
-                </div>
+                <AIChat filters={filters} />
               </section>
             </>
           )}

@@ -33,7 +33,22 @@ export default function Predictions({ filters }: PredictionsProps) {
       }
     } catch (error: any) {
       console.error('Failed to load predictions:', error);
-      setError(error.response?.data?.detail || error.message || 'Failed to load predictions. Please try again.');
+      
+      // Better error messages
+      let errorMessage = 'Failed to load predictions. Please try again.';
+      
+      if (error.response) {
+        // API returned an error
+        errorMessage = error.response.data?.detail || error.response.data?.message || `Server error: ${error.response.status}`;
+      } else if (error.request) {
+        // Request was made but no response received
+        errorMessage = 'Network error: Backend server is not reachable. Make sure the backend is running on port 8080.';
+      } else {
+        // Something else happened
+        errorMessage = error.message || 'An unexpected error occurred.';
+      }
+      
+      setError(errorMessage);
       setPredictions(null);
     } finally {
       setLoading(false);

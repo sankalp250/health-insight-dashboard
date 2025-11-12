@@ -79,10 +79,27 @@ async def get_predictions(
             filters["brand"] = brand
 
         result = await service.get_predictions(filters, years_ahead)
+        
+        # Ensure we always return a valid response
+        if not result:
+            result = {
+                "predictions": [],
+                "confidence": 0.0,
+                "method": "error",
+                "ai_insight": "Unable to generate predictions. Please try different filters.",
+            }
+        
         return PredictionResponse(**result)
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Error generating predictions: {str(e)}"
+        # Return a valid response even on error, don't raise HTTPException
+        import traceback
+        print(f"Error in predictions endpoint: {e}")
+        print(traceback.format_exc())
+        return PredictionResponse(
+            predictions=[],
+            confidence=0.0,
+            method="error",
+            ai_insight=f"Error generating predictions: {str(e)}",
         )
 
 
