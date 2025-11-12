@@ -51,8 +51,16 @@ function App() {
       if (regions.length === 0) setRegions(uniqueRegions);
       if (brands.length === 0) setBrands(uniqueBrands);
       if (years.length === 0) setYears(uniqueYears);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to load data:', error);
+      // Show error to user
+      if (error.response) {
+        console.error('API Error:', error.response.status, error.response.data);
+      } else if (error.request) {
+        console.error('Network Error: Backend not reachable. Is it running on port 8080?');
+      } else {
+        console.error('Error:', error.message);
+      }
     } finally {
       setLoading(false);
     }

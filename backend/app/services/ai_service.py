@@ -319,14 +319,14 @@ Format as JSON array with: title, description, action (with type and field)"""
         ]
 
 
+_ai_service_instance: AIService | None = None
+
+
 def get_ai_service() -> AIService:
     """Get a singleton AI service instance."""
-    from functools import lru_cache
-
-    @lru_cache
-    def _get_service() -> AIService:
+    global _ai_service_instance
+    if _ai_service_instance is None:
         repository = VaccineRepository()
-        return AIService(repository)
-
-    return _get_service()
+        _ai_service_instance = AIService(repository)
+    return _ai_service_instance
 
