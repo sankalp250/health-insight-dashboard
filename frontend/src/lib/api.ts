@@ -118,15 +118,23 @@ export const vaccineApi = {
     filters: VaccineFilters = {},
     yearsAhead: number = 2
   ): Promise<PredictionResponse> => {
-    const params = new URLSearchParams();
-    if (filters.region) params.append('region', filters.region);
-    if (filters.brand) params.append('brand', filters.brand);
-    params.append('years_ahead', yearsAhead.toString());
+    try {
+      const params = new URLSearchParams();
+      if (filters.region) params.append('region', filters.region);
+      if (filters.brand) params.append('brand', filters.brand);
+      params.append('years_ahead', yearsAhead.toString());
 
-    const response = await apiClient.get<PredictionResponse>(
-      `/api/ai/predictions?${params.toString()}`
-    );
-    return response.data;
+      const response = await apiClient.get<PredictionResponse>(
+        `/api/ai/predictions?${params.toString()}`
+      );
+      return response.data;
+    } catch (error: any) {
+      // If network error, return empty predictions with error message
+      if (error.request && !error.response) {
+        throw new Error('Network error: Backend server is not reachable. Make sure the backend is running on port 8080.');
+      }
+      throw error;
+    }
   },
 
   getRecommendations: async (filters: VaccineFilters = {}): Promise<Recommendation[]> => {

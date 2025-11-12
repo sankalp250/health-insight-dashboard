@@ -25,10 +25,13 @@ export default function Predictions({ filters }: PredictionsProps) {
       const data = await vaccineApi.getPredictions(filters, yearsAhead);
       
       // Check if predictions are valid
-      if (data && data.predictions && data.predictions.length > 0) {
+      if (data && data.predictions && Array.isArray(data.predictions) && data.predictions.length > 0) {
         setPredictions(data);
+        setError(null);
       } else {
-        setError('Insufficient data for predictions. Try removing filters or selecting a different time range.');
+        // Show helpful message from backend if available
+        const message = data?.ai_insight || 'Insufficient data for predictions. Try removing filters or selecting a different time range.';
+        setError(message);
         setPredictions(null);
       }
     } catch (error: any) {

@@ -174,90 +174,110 @@ Please provide:
     ) -> dict[str, Any]:
         """
         Generate market predictions using simple trend analysis and AI insights.
+        Always returns a valid response, even if data is insufficient.
         """
         from app.models.vaccine import VaccineFilters
 
-        vaccine_filters = VaccineFilters(
-            region=filters.get("region") if filters else None,
-            brand=filters.get("brand") if filters else None,
-        )
+        try:
+            vaccine_filters = VaccineFilters(
+                region=filters.get("region") if filters else None,
+                brand=filters.get("brand") if filters else None,
+            )
 
-        df = self.repository.summary_metrics(vaccine_filters)
-        if df.empty:
+            df = self.repository.summary_metrics(vaccine_filters)
+            
+            if df.empty:
+                return {
+                    "predictions": [],
+                    "confidence": 0.0,
+                    "method": "insufficient_data",
+                    "ai_insight": "No data available for the selected filters. Please try different filters.",
+                }
+            
+            # Need at least 2 years of data for trend analysis
+            unique_years = df["year"].nunique()
+            if unique_years < 2:
+                return {
+                    "predictions": [],
+                    "confidence": 0.0,
+                    "method": "insufficient_data",
+                    "ai_insight": f"Need at least 2 years of data for predictions. Found {unique_years} year(s). Try removing the year filter.",
+                }
+        except Exception as e:
+            print(f"Error in get_predictions: {e}")
             return {
                 "predictions": [],
                 "confidence": 0.0,
-                "method": "insufficient_data",
-                "ai_insight": "No data available for the selected filters. Please try different filters.",
+                "method": "error",
+                "ai_insight": f"Error processing data: {str(e)}",
             }
-        
-        # Need at least 2 years of data for trend analysis
-        unique_years = df["year"].nunique()
-        if unique_years < 2:
+
+        try:
+            # Simple linear trend prediction
+            df_sorted = df.sort_values("year")
+            latest_year = df_sorted["year"].max()
+
+            # Group by year for aggregate predictions
+            yearly_data = (
+                df_sorted.groupby("year")
+                .agg(
+                    {
+                        "market_size_usd": "sum",
+                        "avg_price_usd": "mean",
+                        "doses_sold_million": "sum",
+                        "growth_rate_percent": "mean",
+                    }
+                )
+                .reset_index()
+            )
+
+            predictions = []
+            for i in range(1, years_ahead + 1):
+                future_year = latest_year + i
+
+                # Simple linear extrapolation
+                if len(yearly_data) >= 2:
+                    market_trend = (
+                        yearly_data["market_size_usd"].iloc[-1]
+                        - yearly_data["market_size_usd"].iloc[-2]
+                    ) / (yearly_data["year"].iloc[-1] - yearly_data["year"].iloc[-2])
+                    predicted_market = (
+                        yearly_data["market_size_usd"].iloc[-1]
+                        + market_trend * i
+                    )
+
+                    price_trend = (
+                        yearly_data["avg_price_usd"].iloc[-1]
+                        - yearly_data["avg_price_usd"].iloc[-2]
+                    ) / (yearly_data["year"].iloc[-1] - yearly_data["year"].iloc[-2])
+                    predicted_price = (
+                        yearly_data["avg_price_usd"].iloc[-1] + price_trend * i
+                    )
+
+                    avg_growth = yearly_data["growth_rate_percent"].mean()
+                else:
+                    predicted_market = yearly_data["market_size_usd"].iloc[-1]
+                    predicted_price = yearly_data["avg_price_usd"].iloc[-1]
+                    avg_growth = 0
+
+                predictions.append(
+                    {
+                        "year": future_year,
+                        "predicted_market_size_usd": max(0, predicted_market),
+                        "predicted_avg_price_usd": max(0, predicted_price),
+                        "predicted_growth_rate_percent": avg_growth,
+                        "confidence_interval_lower": max(0, predicted_market * 0.85),
+                        "confidence_interval_upper": predicted_market * 1.15,
+                    }
+                )
+        except Exception as e:
+            print(f"Error calculating predictions: {e}")
             return {
                 "predictions": [],
                 "confidence": 0.0,
-                "method": "insufficient_data",
-                "ai_insight": f"Need at least 2 years of data for predictions. Found {unique_years} year(s).",
+                "method": "error",
+                "ai_insight": f"Error calculating predictions: {str(e)}",
             }
-
-        # Simple linear trend prediction
-        df_sorted = df.sort_values("year")
-        latest_year = df_sorted["year"].max()
-
-        # Group by year for aggregate predictions
-        yearly_data = (
-            df_sorted.groupby("year")
-            .agg(
-                {
-                    "market_size_usd": "sum",
-                    "avg_price_usd": "mean",
-                    "doses_sold_million": "sum",
-                    "growth_rate_percent": "mean",
-                }
-            )
-            .reset_index()
-        )
-
-        predictions = []
-        for i in range(1, years_ahead + 1):
-            future_year = latest_year + i
-
-            # Simple linear extrapolation
-            if len(yearly_data) >= 2:
-                market_trend = (
-                    yearly_data["market_size_usd"].iloc[-1]
-                    - yearly_data["market_size_usd"].iloc[-2]
-                ) / (yearly_data["year"].iloc[-1] - yearly_data["year"].iloc[-2])
-                predicted_market = (
-                    yearly_data["market_size_usd"].iloc[-1]
-                    + market_trend * i
-                )
-
-                price_trend = (
-                    yearly_data["avg_price_usd"].iloc[-1]
-                    - yearly_data["avg_price_usd"].iloc[-2]
-                ) / (yearly_data["year"].iloc[-1] - yearly_data["year"].iloc[-2])
-                predicted_price = (
-                    yearly_data["avg_price_usd"].iloc[-1] + price_trend * i
-                )
-
-                avg_growth = yearly_data["growth_rate_percent"].mean()
-            else:
-                predicted_market = yearly_data["market_size_usd"].iloc[-1]
-                predicted_price = yearly_data["avg_price_usd"].iloc[-1]
-                avg_growth = 0
-
-            predictions.append(
-                {
-                    "year": future_year,
-                    "predicted_market_size_usd": max(0, predicted_market),
-                    "predicted_avg_price_usd": max(0, predicted_price),
-                    "predicted_growth_rate_percent": avg_growth,
-                    "confidence_interval_lower": predicted_market * 0.85,
-                    "confidence_interval_upper": predicted_market * 1.15,
-                }
-            )
 
         # Get AI insight on predictions
         ai_insight = None
