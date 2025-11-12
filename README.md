@@ -346,32 +346,76 @@ For production deployments, consider migrating to PostgreSQL or another database
 
 ## 🚢 Deployment
 
+### Quick Deploy Guide
+
+**See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete deployment instructions.**
+
 ### Backend Deployment (Render)
 
-1. Connect your GitHub repository to Render
-2. Create a new **Web Service**
-3. Configure:
-   - **Build Command**: `cd backend && pip install -r ../requirements.txt`
-   - **Start Command**: `cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-   - **Environment**: Python 3
-4. Add environment variable:
+1. **Connect GitHub to Render:**
+   - Go to https://dashboard.render.com
+   - Click "New +" → "Web Service"
+   - Connect your GitHub repository
+
+2. **Configure Service:**
+   - Render will auto-detect `render.yaml` configuration
+   - Or manually set:
+     - **Build Command**: `pip install -r requirements.txt`
+     - **Start Command**: `cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+     - **Environment**: Python 3.11
+
+3. **Add Environment Variable:**
    - `GROQ_API_KEY` = your Groq API key
-5. Deploy!
+
+4. **Deploy:**
+   - Click "Create Web Service"
+   - Wait for deployment
+   - Note your backend URL (e.g., `https://health-insight-backend.onrender.com`)
 
 ### Frontend Deployment (Vercel)
 
-1. Connect your GitHub repository to Vercel
-2. Configure:
-   - **Root Directory**: `frontend`
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-3. Add environment variable:
-   - `VITE_API_URL` = your backend URL (e.g., `https://your-backend.onrender.com`)
-4. Deploy!
+1. **Connect GitHub to Vercel:**
+   - Go to https://vercel.com
+   - Click "Add New..." → "Project"
+   - Import your GitHub repository
 
-### Docker (Optional)
+2. **Configure Project:**
+   - Vercel will auto-detect `vercel.json` configuration
+   - Or manually set:
+     - **Root Directory**: `frontend`
+     - **Build Command**: `npm run build`
+     - **Output Directory**: `dist`
 
-Docker configuration files can be added for containerized deployment. See deployment documentation for details.
+3. **Add Environment Variable:**
+   - `VITE_API_URL` = your Render backend URL
+
+4. **Deploy:**
+   - Click "Deploy"
+   - Wait for deployment
+   - Note your frontend URL
+
+### Docker Deployment
+
+**Local Development:**
+```bash
+# Build and run with Docker Compose
+docker-compose up --build
+```
+
+**Individual Services:**
+```bash
+# Backend
+cd backend
+docker build -t health-insight-backend .
+docker run -p 8000:8000 -e GROQ_API_KEY=your_key health-insight-backend
+
+# Frontend
+cd frontend
+docker build -t health-insight-frontend .
+docker run -p 3000:80 -e VITE_API_URL=http://localhost:8000 health-insight-frontend
+```
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions.
 
 ## 📝 Development
 
