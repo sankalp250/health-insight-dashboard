@@ -56,11 +56,17 @@ Fast deployment steps for Health Insight Dashboard.
    - Import `health-insight-dashboard` repository
    - Click "Import"
 
-3. **Configure (Auto-detected from vercel.json):**
-   - **Framework Preset:** Vite (auto-detected)
-   - **Root Directory:** `frontend` (auto-detected)
+3. **Configure (IMPORTANT - Set Root Directory):**
+   - **Framework Preset:** Vite
+   - **Root Directory:** `frontend` ⚠️ **MUST SET THIS MANUALLY**
    - **Build Command:** `npm run build` (auto-detected)
    - **Output Directory:** `dist` (auto-detected)
+   
+   **Note:** Vercel may not auto-detect the root directory. You MUST manually set:
+   - Click "Settings" or "Configure Project"
+   - Find "Root Directory" setting
+   - Set it to: `frontend`
+   - Save changes
 
 4. **Add Environment Variable:**
    - Scroll to "Environment Variables"

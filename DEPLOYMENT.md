@@ -106,10 +106,17 @@ docker run -p 3000:80 -e VITE_API_URL=http://your-backend-url health-insight-fro
 
 3. **Configure Project:**
    - **Framework Preset:** Vite
-   - **Root Directory:** `frontend`
-   - **Build Command:** `npm run build`
-   - **Output Directory:** `dist`
-   - **Install Command:** `npm install`
+   - **Root Directory:** `frontend` ⚠️ **CRITICAL: Set this manually!**
+   - **Build Command:** `npm run build` (auto-detected after root directory is set)
+   - **Output Directory:** `dist` (auto-detected)
+   - **Install Command:** `npm install` (auto-detected)
+   
+   **Important:** Vercel may not auto-detect the root directory. You must:
+   1. Click "Settings" or expand "Configure Project"
+   2. Find "Root Directory" field
+   3. Enter: `frontend`
+   4. Save/Apply changes
+   5. Then proceed with deployment
 
 4. **Add Environment Variables:**
    - Click "Environment Variables"
