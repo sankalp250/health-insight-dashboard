@@ -206,7 +206,7 @@ Please provide:
 
             # Simple linear trend prediction
             df_sorted = df.sort_values("year")
-            latest_year = df_sorted["year"].max()
+            latest_year = int(df_sorted["year"].max())
 
             # Group by year for aggregate predictions
             yearly_data = (
@@ -253,12 +253,12 @@ Please provide:
 
                 predictions.append(
                     {
-                        "year": future_year,
-                        "predicted_market_size_usd": max(0, predicted_market),
-                        "predicted_avg_price_usd": max(0, predicted_price),
-                        "predicted_growth_rate_percent": avg_growth,
-                        "confidence_interval_lower": max(0, predicted_market * 0.85),
-                        "confidence_interval_upper": predicted_market * 1.15,
+                        "year": int(future_year),
+                        "predicted_market_size_usd": float(max(0, predicted_market)),
+                        "predicted_avg_price_usd": float(max(0, predicted_price)),
+                        "predicted_growth_rate_percent": float(avg_growth),
+                        "confidence_interval_lower": float(max(0, predicted_market * 0.85)),
+                        "confidence_interval_upper": float(predicted_market * 1.15),
                     }
                 )
 
@@ -267,11 +267,22 @@ Please provide:
             if self.llm:
                 try:
                     context = self._get_context_data(filters)
+                    # Convert predictions to JSON-serializable format
+                    serializable_predictions = [
+                        {
+                            "year": int(p["year"]),
+                            "predicted_market_size_usd": float(p["predicted_market_size_usd"]),
+                            "predicted_avg_price_usd": float(p["predicted_avg_price_usd"]),
+                            "predicted_growth_rate_percent": float(p["predicted_growth_rate_percent"]),
+                        }
+                        for p in predictions
+                    ]
+                    
                     prompt = f"""Based on this vaccine market data:
 {context}
 
 And these predictions for {years_ahead} years ahead:
-{json.dumps(predictions, indent=2)}
+{json.dumps(serializable_predictions, indent=2)}
 
 Provide a brief (2-3 sentence) insight about the predicted market trends. Be specific and mention key numbers."""
                     response = await self.llm.ainvoke([HumanMessage(content=prompt)])
