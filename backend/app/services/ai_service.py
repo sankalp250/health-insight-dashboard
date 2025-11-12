@@ -203,16 +203,7 @@ Please provide:
                     "method": "insufficient_data",
                     "ai_insight": f"Need at least 2 years of data for predictions. Found {unique_years} year(s). Try removing the year filter.",
                 }
-        except Exception as e:
-            print(f"Error in get_predictions: {e}")
-            return {
-                "predictions": [],
-                "confidence": 0.0,
-                "method": "error",
-                "ai_insight": f"Error processing data: {str(e)}",
-            }
 
-        try:
             # Simple linear trend prediction
             df_sorted = df.sort_values("year")
             latest_year = df_sorted["year"].max()
@@ -270,40 +261,42 @@ Please provide:
                         "confidence_interval_upper": predicted_market * 1.15,
                     }
                 )
-        except Exception as e:
-            print(f"Error calculating predictions: {e}")
-            return {
-                "predictions": [],
-                "confidence": 0.0,
-                "method": "error",
-                "ai_insight": f"Error calculating predictions: {str(e)}",
-            }
 
-        # Get AI insight on predictions
-        ai_insight = None
-        if self.llm:
-            try:
-                context = self._get_context_data(filters)
-                prompt = f"""Based on this vaccine market data:
+            # Get AI insight on predictions
+            ai_insight = None
+            if self.llm:
+                try:
+                    context = self._get_context_data(filters)
+                    prompt = f"""Based on this vaccine market data:
 {context}
 
 And these predictions for {years_ahead} years ahead:
 {json.dumps(predictions, indent=2)}
 
 Provide a brief (2-3 sentence) insight about the predicted market trends. Be specific and mention key numbers."""
-                response = await self.llm.ainvoke([HumanMessage(content=prompt)])
-                ai_insight = response.content
-            except Exception as e:
-                # Don't fail if AI insight fails, just skip it
-                print(f"Warning: Failed to get AI insight: {e}")
-                ai_insight = None
+                    response = await self.llm.ainvoke([HumanMessage(content=prompt)])
+                    ai_insight = response.content
+                except Exception as e:
+                    # Don't fail if AI insight fails, just skip it
+                    print(f"Warning: Failed to get AI insight: {e}")
+                    ai_insight = None
 
-        return {
-            "predictions": predictions,
-            "confidence": 0.75,
-            "method": "linear_extrapolation",
-            "ai_insight": ai_insight,
-        }
+            return {
+                "predictions": predictions,
+                "confidence": 0.75,
+                "method": "linear_extrapolation",
+                "ai_insight": ai_insight,
+            }
+        except Exception as e:
+            import traceback
+            print(f"Error in get_predictions: {e}")
+            print(traceback.format_exc())
+            return {
+                "predictions": [],
+                "confidence": 0.0,
+                "method": "error",
+                "ai_insight": f"Error generating predictions: {str(e)}",
+            }
 
     async def get_recommendations(
         self, filters: dict[str, Any] | None = None
