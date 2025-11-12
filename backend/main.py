@@ -1,50 +1,63 @@
 import pandas as pd
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
-# Initialize the FastAPI app
-app = FastAPI(
-    title="Health Insight Dashboard API",
-    description="API for vaccine market analytics.",
-    version="1.0.0"
+from pathlib import Path
+from app.services.data_service import (
+    load_and_clean_data as service_load_and_clean_data,
+    get_filtered_vaccine_data,
 )
 
-# Add CORS middleware to allow cross-origin requests from our frontend
-# This is essential for the React app to communicate with this API
+# Create the FastAPI application instance
+app = FastAPI(
+    title="Health Insight Dashboard API",
+    description="An API for global COVID-19 vaccination data.",
+    version="1.0.0",
+)
+
+# Configure CORS (Cross-Origin Resource Sharing)
+# This allows our React frontend (on a different URL) to request data from this API.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For development, we allow all. For production, lock this down.
+    allow_origins=["*"],  # For production, you should restrict this to your frontend's domain
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# --- Data Loading ---
-# We load the data here once when the application starts.
-# The @app.on_event("startup") decorator would be a more advanced way,
-# but for simplicity, we'll load it directly into a global DataFrame.
-try:
-    vaccine_df = pd.read_csv("data/pharma_sales_data.csv")
-    print("✅ Dataset loaded successfully!")
-except FileNotFoundError:
-    print("❌ Error: 'data/pharma_sales_data.csv' not found.")
-    print("Please make sure the dataset is in the 'backend/data/' directory.")
-    vaccine_df = pd.DataFrame() # Create an empty DataFrame if file not found
+# --- Data Loading and Cleaning ---
+vaccine_df = None
 
+@app.on_event("startup")
+def load_and_clean_data():
+    """
+    This function runs when the API server starts.
+    It loads the dataset and performs initial cleaning.
+    """
+    global vaccine_df
+    try:
+        # Warm the cache and store a copy for the root check
+        df = service_load_and_clean_data()
+        vaccine_df = df
+        print("✅ Dataset loaded and cleaned successfully.")
+    except Exception:
+        print("❌ ERROR: Failed to load dataset via data service.")
+        vaccine_df = pd.DataFrame()
 
 # --- API Endpoints ---
 @app.get("/")
 def read_root():
     """A simple root endpoint to confirm the API is running."""
-    return {"message": "Welcome to the Health Insight Dashboard API"}
+    return {"status": "ok", "message": "Welcome to the Health Insight Dashboard API"}
 
 @app.get("/api/data-check")
-def check_data():
-    """An endpoint to check if the data was loaded correctly."""
-    if not vaccine_df.empty:
+def check_data_load():
+    """Endpoint to verify that the dataset was loaded correctly."""
+    df = service_load_and_clean_data()
+    if df is not None and not df.empty:
         return {
             "status": "success",
-            "rows_loaded": len(vaccine_df),
-            "columns": vaccine_df.columns.tolist()
+            "rows_loaded": len(df),
+            "columns": df.columns.tolist(),
+            "data_head": df.head().to_dict(orient='records'),
         }
     return {"status": "error", "message": "Dataset could not be loaded."}
