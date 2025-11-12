@@ -48,14 +48,22 @@ try:
     print("✅ API Key is valid! Successfully connected to Groq API")
     print(f"   Available models: {len(models.data)} models")
     
-    # Check for llama-3.1 model
+    # Check for llama-3.1 models
     model_names = [m.id for m in models.data]
-    if "llama-3.1-70b-versatile" in model_names:
-        print("✅ Model 'llama-3.1-70b-versatile' is available")
+    print(f"\n📋 Available models ({len(model_names)} total):")
+    for model in model_names[:10]:  # Show first 10
+        print(f"   - {model}")
+    
+    # Check for preferred models
+    preferred_models = ["llama-3.1-8b-instant", "llama-3.1-70b-versatile", "mixtral-8x7b-32768"]
+    available_preferred = [m for m in preferred_models if m in model_names]
+    
+    if available_preferred:
+        print(f"\n✅ Preferred models available: {', '.join(available_preferred)}")
+        print(f"   Using: {available_preferred[0]} (most stable)")
     else:
-        print("⚠️  Model 'llama-3.1-70b-versatile' not found")
-        print(f"   Available models: {', '.join(model_names[:5])}...")
-        print("   You may need to update the model name in ai_service.py")
+        print("\n⚠️  Preferred models not found in available models")
+        print("   The code will try to use 'llama-3.1-8b-instant' first, then fallback to 'llama-3.1-70b-versatile'")
         
 except ImportError:
     print("\n⚠️  groq package not installed")

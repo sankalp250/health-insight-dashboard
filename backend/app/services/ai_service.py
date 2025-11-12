@@ -24,14 +24,25 @@ class AIService:
         self.llm = None
         if self.settings.groq_api_key:
             try:
+                # Use llama-3.1-8b-instant for better stability and availability
                 self.llm = ChatGroq(
                     groq_api_key=self.settings.groq_api_key.strip(),
-                    model_name="llama-3.1-70b-versatile",
+                    model_name="llama-3.1-8b-instant",
                     temperature=0.7,
                 )
             except Exception as e:
                 print(f"Warning: Failed to initialize Groq LLM: {e}")
-                self.llm = None
+                # Try fallback model if instant fails
+                try:
+                    self.llm = ChatGroq(
+                        groq_api_key=self.settings.groq_api_key.strip(),
+                        model_name="llama-3.1-70b-versatile",
+                        temperature=0.7,
+                    )
+                    print("Using fallback model: llama-3.1-70b-versatile")
+                except Exception as e2:
+                    print(f"Warning: Fallback model also failed: {e2}")
+                    self.llm = None
 
     def _get_context_data(self, filters: dict[str, Any] | None = None) -> str:
         """Extract relevant context from the dataset for RAG."""
