@@ -1,7 +1,25 @@
+/**
+ * API Client Module
+ * 
+ * Design Pattern: Singleton API Client
+ * - Centralized HTTP client configuration
+ * - Consistent error handling across all requests
+ * - Environment-aware base URL (dev vs production)
+ * 
+ * Benefits:
+ * - Single point of configuration
+ * - Easy to add interceptors (auth, logging)
+ * - Type-safe API methods
+ */
+
 import axios from 'axios';
 
+// Environment Configuration: Supports both local dev and production
+// Vite automatically injects environment variables at build time
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
+// Axios Instance: Pre-configured client for all API requests
+// Using instance pattern allows shared configuration and interceptors
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -86,9 +104,25 @@ export interface Recommendation {
   };
 }
 
+/**
+ * API Service Object
+ * 
+ * Encapsulates all API calls in a single object for:
+ * - Better organization and discoverability
+ * - Consistent error handling
+ * - Type safety with TypeScript generics
+ */
 export const vaccineApi = {
+  /**
+   * Fetch vaccine market data with optional filters
+   * 
+   * Query Parameter Building: Only includes non-empty filter values
+   * This prevents sending unnecessary parameters and keeps URLs clean
+   */
   getVaccines: async (filters: VaccineFilters = {}): Promise<VaccineListResponse> => {
     const params = new URLSearchParams();
+    
+    // Conditional Parameter Building: Only add non-empty filters
     if (filters.region) params.append('region', filters.region);
     if (filters.brand) params.append('brand', filters.brand);
     if (filters.year) params.append('year', filters.year.toString());
@@ -114,6 +148,14 @@ export const vaccineApi = {
     return response.data;
   },
 
+  /**
+   * Get market predictions with enhanced error handling
+   * 
+   * Error Handling Strategy:
+   * - Distinguishes between network errors and API errors
+   * - Provides user-friendly error messages
+   * - Re-throws for component-level error handling
+   */
   getPredictions: async (
     filters: VaccineFilters = {},
     yearsAhead: number = 2
@@ -129,7 +171,8 @@ export const vaccineApi = {
       );
       return response.data;
     } catch (error: any) {
-      // If network error, return empty predictions with error message
+      // Enhanced Error Handling: Provide actionable error messages
+      // Network errors (no response) vs API errors (error response)
       if (error.request && !error.response) {
         throw new Error('Network error: Backend server is not reachable. Make sure the backend is running on port 8080.');
       }

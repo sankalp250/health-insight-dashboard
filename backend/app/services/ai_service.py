@@ -16,36 +16,74 @@ from app.repositories.vaccine_repository import VaccineRepository
 
 
 class AIService:
-    """Service for AI-powered data analysis and recommendations."""
+    """
+    Service Layer Pattern: Encapsulates AI/LLM business logic.
+    
+    This service handles:
+    - Natural language query processing (RAG pattern)
+    - Market predictions using statistical methods
+    - Context-aware recommendations
+    
+    Uses Dependency Injection: Repository is injected for testability.
+    """
 
     def __init__(self, repository: VaccineRepository) -> None:
+        """
+        Initialize AI service with repository dependency.
+        
+        Implements graceful degradation: If LLM initialization fails,
+        service continues to work but AI features return helpful error messages.
+        
+        Args:
+            repository: Data repository for accessing vaccine market data
+        """
         self.repository = repository
         self.settings = get_settings()
         self.llm = None
+        
+        # LLM Initialization with Fallback Strategy
+        # Primary: Fast instant model for better availability
+        # Fallback: More capable model if primary fails
         if self.settings.groq_api_key:
             try:
-                # Use llama-3.1-8b-instant for better stability and availability
+                # Primary model: Optimized for speed and availability
                 self.llm = ChatGroq(
-                    groq_api_key=self.settings.groq_api_key.strip(),
+                    groq_api_key=self.settings.groq_api_key.strip(),  # Strip whitespace to prevent errors
                     model_name="llama-3.1-8b-instant",
-                    temperature=0.7,
+                    temperature=0.7,  # Balance between creativity and consistency
                 )
             except Exception as e:
                 print(f"Warning: Failed to initialize Groq LLM: {e}")
-                # Try fallback model if instant fails
+                # Fallback Strategy: Try more capable model if primary fails
                 try:
                     self.llm = ChatGroq(
                         groq_api_key=self.settings.groq_api_key.strip(),
-                        model_name="llama-3.1-70b-versatile",
+                        model_name="llama-3.1-70b-versatile",  # More capable but slower
                         temperature=0.7,
                     )
                     print("Using fallback model: llama-3.1-70b-versatile")
                 except Exception as e2:
+                    # Graceful Degradation: Service works without AI features
                     print(f"Warning: Fallback model also failed: {e2}")
                     self.llm = None
 
     def _get_context_data(self, filters: dict[str, Any] | None = None) -> str:
-        """Extract relevant context from the dataset for RAG."""
+        """
+        RAG Pattern: Retrieval-Augmented Generation context extraction.
+        
+        This method implements the retrieval step of RAG by:
+        1. Filtering data based on user context
+        2. Aggregating key statistics
+        3. Formatting as text for LLM consumption
+        
+        The extracted context helps the LLM provide accurate, data-grounded responses.
+        
+        Args:
+            filters: Optional filters to narrow context scope
+            
+        Returns:
+            Formatted string containing relevant data context
+        """
         from app.models.vaccine import VaccineFilters
 
         vaccine_filters = VaccineFilters(
@@ -173,8 +211,27 @@ Please provide:
         self, filters: dict[str, Any] | None = None, years_ahead: int = 2
     ) -> dict[str, Any]:
         """
-        Generate market predictions using simple trend analysis and AI insights.
-        Always returns a valid response, even if data is insufficient.
+        Predictive Analytics: Generate market forecasts using statistical methods.
+        
+        Implementation Strategy:
+        - Linear Extrapolation: Simple but effective for trend-based predictions
+        - Data Validation: Ensures sufficient historical data before prediction
+        - Graceful Degradation: Returns helpful messages if data is insufficient
+        - Type Safety: Converts numpy types to Python native types for JSON serialization
+        
+        Algorithm:
+        1. Validate data availability (need at least 2 years)
+        2. Calculate linear trends from historical data
+        3. Extrapolate future values using trend slope
+        4. Generate confidence intervals (85-115% of prediction)
+        5. Optionally enhance with AI insights
+        
+        Args:
+            filters: Optional filters to scope prediction data
+            years_ahead: Number of future years to predict (1-5)
+            
+        Returns:
+            Dictionary containing predictions, confidence, method, and AI insights
         """
         from app.models.vaccine import VaccineFilters
 

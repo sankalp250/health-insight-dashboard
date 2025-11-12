@@ -13,23 +13,57 @@ from app.models.vaccine import VaccineFilters, VaccineRecord
 
 
 class VaccineRepository:
-    """Provide filtered access to vaccine dataset records."""
+    """
+    Repository Pattern: Data Access Layer
+    
+    Encapsulates all data access logic, providing a clean interface for
+    the service layer. This pattern allows:
+    - Easy data source switching (CSV -> Database)
+    - Centralized data validation and transformation
+    - Testability through dependency injection
+    
+    Data Loading Strategy:
+    - Loads dataset once at initialization (in-memory for performance)
+    - Normalizes and validates data on load
+    - Provides filtered views through query methods
+    """
 
     def __init__(self) -> None:
+        """Initialize repository and load dataset into memory."""
         self._settings = get_settings()
-        self._df = self._load_dataset()
+        self._df = self._load_dataset()  # Load once, use many times
 
     def _load_dataset(self) -> pd.DataFrame:
-        """Read the dataset from the configured CSV path."""
+        """
+        Data Loading and Normalization
+        
+        Performs ETL (Extract, Transform, Load) operations:
+        1. Extract: Read CSV file
+        2. Transform: Normalize columns, types, clean data
+        3. Load: Return validated DataFrame
+        
+        Data Quality Measures:
+        - Column name normalization (lowercase, trimmed)
+        - Type coercion with error handling
+        - String cleaning (strip whitespace)
+        - Null handling (fill with defaults)
+        """
         data_file = self._settings.data_file
         if not data_file.exists():
             msg = f"Dataset file not found at {data_file}"
             raise FileNotFoundError(msg)
 
         df = pd.read_csv(data_file)
-        # Normalize column names/types to expected schema.
+        
+        # Data Normalization: Ensure consistent schema
+        # Lowercase and trim column names for case-insensitive access
         df.columns = [col.strip().lower() for col in df.columns]
+        
+        # Type Coercion: Ensure correct data types
         df["year"] = df["year"].astype(int)
+        
+        # Numeric Fields: Coerce to numeric, invalid values become NaN
+        # Using 'coerce' prevents errors from malformed data
         numeric_fields = [
             "market_size_usd",
             "avg_price_usd",
@@ -39,8 +73,11 @@ class VaccineRepository:
         for field in numeric_fields:
             df[field] = pd.to_numeric(df[field], errors="coerce")
 
+        # String Cleaning: Remove leading/trailing whitespace
         df["region"] = df["region"].str.strip()
         df["brand"] = df["brand"].str.strip()
+        
+        # Null Handling: Fill missing insights with empty string
         df["insight"] = df["insight"].fillna("").astype(str)
 
         return df

@@ -69,9 +69,22 @@ async def get_predictions(
     brand: str | None = Query(None, description="Filter by brand"),
     years_ahead: int = Query(2, ge=1, le=5, description="Number of years to predict"),
 ) -> PredictionResponse:
-    """Get market predictions based on historical trends."""
+    """
+    Get market predictions based on historical trends.
+    
+    Error Handling Strategy: Graceful Degradation
+    - Always returns 200 OK with valid response structure
+    - Errors are included in response body, not HTTP status
+    - This prevents frontend crashes and provides user-friendly messages
+    
+    Query Validation: FastAPI automatically validates:
+    - years_ahead must be between 1 and 5 (ge=1, le=5)
+    - Optional filters can be None
+    """
     try:
         service = get_ai_service()
+        
+        # Filter Building: Only include provided filters
         filters = {}
         if region:
             filters["region"] = region
@@ -80,7 +93,7 @@ async def get_predictions(
 
         result = await service.get_predictions(filters, years_ahead)
         
-        # Ensure we always return a valid response
+        # Defensive Programming: Ensure valid response structure
         if not result:
             result = {
                 "predictions": [],
@@ -91,10 +104,12 @@ async def get_predictions(
         
         return PredictionResponse(**result)
     except Exception as e:
-        # Return a valid response even on error, don't raise HTTPException
+        # Graceful Error Handling: Return error in response, not HTTP exception
+        # This ensures frontend always receives valid JSON structure
         import traceback
         print(f"Error in predictions endpoint: {e}")
-        print(traceback.format_exc())
+        print(traceback.format_exc())  # Log full traceback for debugging
+        
         return PredictionResponse(
             predictions=[],
             confidence=0.0,
