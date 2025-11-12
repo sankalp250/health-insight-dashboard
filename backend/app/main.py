@@ -7,7 +7,7 @@ from __future__ import annotations
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import summary, vaccines
+from app.api.routes import ai, summary, vaccines
 from app.core.config import get_settings
 
 
@@ -27,6 +27,7 @@ def create_app() -> FastAPI:
 
     app.include_router(vaccines.router)
     app.include_router(summary.router)
+    app.include_router(ai.router)
 
     @app.get("/healthz", tags=["Health"])
     def health_check() -> dict[str, str]:

@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     data_file: Path = (
         Path(__file__).resolve().parents[2] / "data" / "vaccine_market_dataset.csv"
     )
+    groq_api_key: str | None = None
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

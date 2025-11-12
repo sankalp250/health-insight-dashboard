@@ -50,6 +50,42 @@ export interface VaccineFilters {
   offset?: number;
 }
 
+export interface ChatRequest {
+  query: string;
+  region?: string;
+  brand?: string;
+  year?: number;
+}
+
+export interface ChatResponse {
+  answer: string;
+  visualization: string | null;
+  confidence: number;
+}
+
+export interface PredictionResponse {
+  predictions: Array<{
+    year: number;
+    predicted_market_size_usd: number;
+    predicted_avg_price_usd: number;
+    predicted_growth_rate_percent: number;
+    confidence_interval_lower: number;
+    confidence_interval_upper: number;
+  }>;
+  confidence: number;
+  method: string;
+  ai_insight: string | null;
+}
+
+export interface Recommendation {
+  title: string;
+  description: string;
+  action: {
+    type: string;
+    field?: string;
+  };
+}
+
 export const vaccineApi = {
   getVaccines: async (filters: VaccineFilters = {}): Promise<VaccineListResponse> => {
     const params = new URLSearchParams();
@@ -70,6 +106,38 @@ export const vaccineApi = {
     if (filters.year) params.append('year', filters.year.toString());
 
     const response = await apiClient.get<SummaryResponse>(`/api/summary?${params.toString()}`);
+    return response.data;
+  },
+
+  chatQuery: async (request: ChatRequest): Promise<ChatResponse> => {
+    const response = await apiClient.post<ChatResponse>('/api/ai/chat', request);
+    return response.data;
+  },
+
+  getPredictions: async (
+    filters: VaccineFilters = {},
+    yearsAhead: number = 2
+  ): Promise<PredictionResponse> => {
+    const params = new URLSearchParams();
+    if (filters.region) params.append('region', filters.region);
+    if (filters.brand) params.append('brand', filters.brand);
+    params.append('years_ahead', yearsAhead.toString());
+
+    const response = await apiClient.get<PredictionResponse>(
+      `/api/ai/predictions?${params.toString()}`
+    );
+    return response.data;
+  },
+
+  getRecommendations: async (filters: VaccineFilters = {}): Promise<Recommendation[]> => {
+    const params = new URLSearchParams();
+    if (filters.region) params.append('region', filters.region);
+    if (filters.brand) params.append('brand', filters.brand);
+    if (filters.year) params.append('year', filters.year.toString());
+
+    const response = await apiClient.get<Recommendation[]>(
+      `/api/ai/recommendations?${params.toString()}`
+    );
     return response.data;
   },
 };

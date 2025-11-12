@@ -4,6 +4,8 @@ import Sidebar from './components/Sidebar';
 import FilterPanel from './components/FilterPanel';
 import KPICard from './components/KPICard';
 import Charts from './components/Charts';
+import AIChat from './components/AIChat';
+import Predictions from './components/Predictions';
 import { vaccineApi } from './lib/api';
 import type { VaccineFilters, VaccineRecord, SummaryKPI } from './lib/api';
 
@@ -108,6 +110,12 @@ function App() {
 
               {/* Charts */}
               <Charts data={vaccineData} />
+
+              {/* AI Features Section */}
+              <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <AIChat filters={filters} />
+                <Predictions filters={filters} />
+              </div>
             </>
           )}
         </main>
