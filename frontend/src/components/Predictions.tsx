@@ -10,7 +10,8 @@ interface PredictionsProps {
 
 export default function Predictions({ filters }: PredictionsProps) {
   const [predictions, setPredictions] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [yearsAhead, setYearsAhead] = useState(2);
 
   useEffect(() => {
@@ -20,10 +21,20 @@ export default function Predictions({ filters }: PredictionsProps) {
   const loadPredictions = async () => {
     try {
       setLoading(true);
+      setError(null);
       const data = await vaccineApi.getPredictions(filters, yearsAhead);
-      setPredictions(data);
-    } catch (error) {
+      
+      // Check if predictions are valid
+      if (data && data.predictions && data.predictions.length > 0) {
+        setPredictions(data);
+      } else {
+        setError('Insufficient data for predictions. Try removing filters or selecting a different time range.');
+        setPredictions(null);
+      }
+    } catch (error: any) {
       console.error('Failed to load predictions:', error);
+      setError(error.response?.data?.detail || error.message || 'Failed to load predictions. Please try again.');
+      setPredictions(null);
     } finally {
       setLoading(false);
     }
@@ -32,17 +43,50 @@ export default function Predictions({ filters }: PredictionsProps) {
   if (loading) {
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="flex flex-col items-center justify-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
+          <p className="text-gray-500 dark:text-gray-400">Loading predictions...</p>
         </div>
       </div>
     );
   }
 
-  if (!predictions || predictions.predictions.length === 0) {
+  if (error) {
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <p className="text-gray-500 dark:text-gray-400">No predictions available.</p>
+        <div className="flex items-center gap-2 mb-2">
+          <TrendingUp className="w-5 h-5 text-gray-400" />
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            Market Predictions
+          </h3>
+        </div>
+        <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+          <p className="text-sm text-yellow-800 dark:text-yellow-200">{error}</p>
+          <p className="text-xs text-yellow-600 dark:text-yellow-400 mt-2">
+            Tip: Clear filters or select a broader time range to generate predictions.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!predictions || !predictions.predictions || predictions.predictions.length === 0) {
+    return (
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+        <div className="flex items-center gap-2 mb-2">
+          <TrendingUp className="w-5 h-5 text-gray-400" />
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            Market Predictions
+          </h3>
+        </div>
+        <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg">
+          <p className="text-gray-500 dark:text-gray-400 text-sm">
+            No predictions available. This usually means there's insufficient historical data for the selected filters.
+          </p>
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
+            Try removing filters or selecting a different region/brand to see predictions.
+          </p>
+        </div>
       </div>
     );
   }

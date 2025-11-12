@@ -183,11 +183,22 @@ Please provide:
         )
 
         df = self.repository.summary_metrics(vaccine_filters)
-        if df.empty or len(df) < 2:
+        if df.empty:
             return {
                 "predictions": [],
                 "confidence": 0.0,
                 "method": "insufficient_data",
+                "ai_insight": "No data available for the selected filters. Please try different filters.",
+            }
+        
+        # Need at least 2 years of data for trend analysis
+        unique_years = df["year"].nunique()
+        if unique_years < 2:
+            return {
+                "predictions": [],
+                "confidence": 0.0,
+                "method": "insufficient_data",
+                "ai_insight": f"Need at least 2 years of data for predictions. Found {unique_years} year(s).",
             }
 
         # Simple linear trend prediction
